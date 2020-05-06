@@ -8,22 +8,22 @@ from selenium.webdriver.support import expected_conditions as EC
 from nonebot import on_command, CommandSession
 
 
-@on_command('gacha', aliases=('十连', '抽十连'))
-async def gacha():
+@on_command('gacha', aliases=('十连', '抽十连'), only_to_me=False)
+async def gacha(session: CommandSession):
     (characters, rare_characters) = await bilibili_gacha(1)
     num_of_rare = len(rare_characters)
     output_str = '你抽到了：' + ', '.join(characters) +\
                  '\n其中三星是：' + ', '.join(rare_characters) +\
                  '\n共' + str(num_of_rare) + '个.'
-    print(output_str)
+    session.send(output_str)
 
-@on_command('gacha10x', aliases=('一井', '抽一井'))
-async def gacha10x():
+@on_command('gacha10x', aliases=('一井', '抽一井'), only_to_me=False)
+async def gacha10x(session: CommandSession):
     (characters, rare_characters) = await bilibili_gacha(30)
     num_of_rare = len(rare_characters)
     output_str = '你抽到了：' + str(num_of_rare) + '个三星'\
                  '\n分别是：' + ', '.join(rare_characters) + '.'
-    print(output_str)
+    session.send(output_str)
 
 async def bilibili_gacha(turns: int) -> ([], []):
     # enable browser logging
