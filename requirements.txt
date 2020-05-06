@@ -1,0 +1,2 @@
+selenium>=3
+nonebot>=1.6.0
