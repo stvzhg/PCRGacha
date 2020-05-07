@@ -29,7 +29,10 @@ async def bilibili_gacha(turns: int) -> ([], []):
     # enable browser logging
     d = DesiredCapabilities.CHROME
     d['goog:loggingPrefs'] = {'browser': 'INFO'}
-    driver = webdriver.Chrome(desired_capabilities=d)
+    options = webdriver.ChromeOptions()
+    options.add_argument('window-size=1200x600')
+    options.add_argument('headless')
+    driver = webdriver.Chrome(desired_capabilities=d, options=options)
 
     # load the desired webpage
     driver.get('https://wiki.biligame.com/pcr/%E6%89%AD%E8%9B%8B%E6%A8%A1%E6%8B%9F%E5%99%A8')
